@@ -1,6 +1,14 @@
-	var TodoModel = require('../models/model');
+var TodoModel = require('../models/model');
+function getTodos(res) {
+    TodoModel.find(function (err, todos) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(todos); // return all todos
+    });
+}
 
-	module.exports = {
+module.exports = {
 		sendall: function(req, res, next){
 			TodoModel.find(function(err, data){
 				if(err){
@@ -12,14 +20,15 @@
 		},
 		add: function(req, res, next){
 			var newData = new TodoModel({
-				text : req.body.text
+				text : req.body.text,
+				done: false
 			});
 
 			newData.save(function(err, data){
 				if(err){
 					res.send(err)
 				}else{
-					res.json(data);
+					getTodos(res)
 				}
 			});
 		},
@@ -34,7 +43,7 @@
 				if(err){
 					res.send(err);
 				}else{
-					res.send(result);
+					getTodos(res)
 				}
 			});
 		},

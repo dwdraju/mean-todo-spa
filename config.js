@@ -1,8 +1,8 @@
 var config = {};
 
 config.mongoURI = {
-  development: 'mongodb://localhost/driving',
-  test: 'mongodb://localhost/driving-test'
+  development: 'mongodb://localhost/mean-todo',
+  test: 'mongodb://localhost/mean-todo-test'
 };
 
 module.exports = config;
